@@ -51,23 +51,15 @@ impl From<&str> for Person {
             return Person::default();
         }
 
-        let name = match parts.get(0) {
-            Some(n) => n,
-            _ => return Person::default(),
-        };
-
+        let name = parts[0].to_string();
         if name.is_empty() {
             return Person::default();
         }
 
-        let age = match parts.get(1) {
-            Some(a) => a.parse::<usize>(),
-            _ => return Person::default(),
-        };
-
+        let age = parts[1].parse::<usize>();
         match age {
             Ok(a) => Person {
-                name: name.to_string(),
+                name: name,
                 age: a,
             },
             Err(_) => Person::default(),
